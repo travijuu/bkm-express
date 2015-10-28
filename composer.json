@@ -1,0 +1,23 @@
+{
+    "name": "travijuu/bkm-express",
+    "type": "library",
+    "description": "BKM Express Payment Library",
+    "keywords": ["bkm express", "payment", "e-commerce"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erkin Cakar",
+            "email": "erk.cakar@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Travijuu\\BkmExpress": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
