@@ -118,19 +118,27 @@ class BkmExpress
         return $incomingResult;
     }
 
-    public function getBank($bankId)
+    public function getBank($bankId, $bin = null)
     {
         foreach ($this->bankList as $bank) {
             if ($bank['id'] == $bankId) {
-                return $bank;
+                if (!is_null($bin)) {
+                    if(array_search($bin, array_column($bank['bins'], 'bin'))) {
+                        return $bank;
+                    }
+                } else {
+                    return $bank;
+                }
             }
         }
+
+        return null;
     }
 
     public function getPosResponse($bankId, $data)
     {
         $bank  = $this->getBank($bankId);
-        $class = 'PosResponse\Response' . $bank['system'];
+        $class = __NAMESPACE__ .'\PosResponse\Response' . $bank['system'];
 
         if (! class_exists($class)) {
             throw new ClassNotFoundException("{$class} not found!");

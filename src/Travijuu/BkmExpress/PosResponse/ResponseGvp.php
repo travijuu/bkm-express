@@ -19,6 +19,6 @@ class ResponseGvp extends AbstractPosResponse
             ->setOrderId($response->order->orderId)
             ->setResponseCode($response->transaction->response->code)
             ->setResponseMessage($response->transaction->response->errorMsg . $response->transaction->response->sysErrorMsg)
-            ->setAuthCode($response->authCode);
+            ->setAuthCode($response->transaction->authCode);
     }
 }

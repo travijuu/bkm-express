@@ -64,7 +64,7 @@ class IncomingResult
     public function __construct($data)
     {
         $this->t      = array_get($data, 't', null);
-        $this->r      = array_get($data, 'r', 0);
+        $this->r      = array_get($data, 'r', null);
         $this->ts     = array_get($data, 'ts', null);
         $this->s      = array_get($data, 's', null);
         $this->xid    = array_get($data, 'xid', null);
@@ -73,7 +73,7 @@ class IncomingResult
         $this->eKey1  = array_get($data, 'eKey1', null);
         $this->eKey2  = array_get($data, 'eKey2', null);
 
-        $this->posRef = $this->r ?
+        $this->posRef = is_null($this->r) ?
             array_get($data, 'posMessage', null) :
             array_get($data, 'posRef', null);
     }
@@ -280,12 +280,12 @@ class IncomingResult
 
     public function success()
     {
-        return $this->r == 1;
+        return is_null($this->r);
     }
 
     public function verify($bkmPublicKeyPath)
     {
-        $dataToBeVerified = $this->t . $this->pData . $this->eKey1 . $this->eKey2 . $this->ts;
+        $dataToBeVerified = $this->t . $this->posRef . $this->xid . $this->md . $this->ts;
         $decodedSignature = base64_decode($this->s);
 
         return Certificate::verify($decodedSignature, $dataToBeVerified, $bkmPublicKeyPath);
