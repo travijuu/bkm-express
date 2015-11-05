@@ -3,6 +3,7 @@ namespace Travijuu\BkmExpress;
 
 use Travijuu\BkmExpress\Common\IncomingResult;
 use Travijuu\BkmExpress\Common\Result;
+use Travijuu\BkmExpress\Exception\UnexpectedDataType;
 use Travijuu\BkmExpress\Exception\VerificationException;
 use Travijuu\BkmExpress\Payment\InitializePayment\BKMSoapClient;
 use Travijuu\BkmExpress\Payment\InitializePayment\InitializePayment;
@@ -82,7 +83,7 @@ class BkmExpress
         $verified = $response->verify($this->bkmPublicKeyPath);
 
         if (! $verified) {
-            throw new VerificationException("Response can not be verified!");
+            throw new VerificationException("Response cannot be verified!");
         }
 
         if ($response->success()) {
@@ -113,11 +114,11 @@ class BkmExpress
         $verified       = $incomingResult->verify($this->bkmPublicKeyPath);
 
         if (Calculate::timeDiff($incomingResult->getTimestamp()) > 30) {
-            return Result::build('REQUEST_NOT_SYNCHRONIZED');
+            throw new VerificationException('Request is not synchronized!');
         }
 
         if (! $verified) {
-            return Result::build('MAC_VERIFICATION_FAILED');
+            throw new VerificationException('Response cannot be verified!');
         }
 
         return $incomingResult;
@@ -156,7 +157,7 @@ class BkmExpress
     public function setDefaultBank($bank)
     {
         if (! in_array($bank, $this->bankSystemList)) {
-            throw new \Exception("not acceptable");
+            throw new UnexpectedDataType("Not acceptable bank type!");
         }
 
         $this->defaultBank = $bank;
