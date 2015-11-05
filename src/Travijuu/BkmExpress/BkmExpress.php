@@ -29,19 +29,24 @@ class BkmExpress
 
     public $bkmPublicKeyPath;
 
+    public $defaultBank;
+
     public $bankList = [];
 
     public $virtualPosList = [];
 
+    public $bankSystemList = ['Posnet', 'NestPay', 'Gvp'];
 
-    public function __construct($mid, $successUrl, $cancelUrl, $privateKeyPath, $publicKeyPath, $bkmPublicKeyPath)
+
+    public function __construct($mid, $successUrl, $cancelUrl, $privateKeyPath, $publicKeyPath, $bkmPublicKeyPath, $defaultBank = 'NestPay')
     {
-        $this->mid            = $mid;
-        $this->successUrl     = $successUrl;
-        $this->cancelUrl      = $cancelUrl;
-        $this->privateKeyPath = $privateKeyPath;
-        $this->publicKeyPath  = $publicKeyPath;
+        $this->mid              = $mid;
+        $this->successUrl       = $successUrl;
+        $this->cancelUrl        = $cancelUrl;
+        $this->privateKeyPath   = $privateKeyPath;
+        $this->publicKeyPath    = $publicKeyPath;
         $this->bkmPublicKeyPath = $bkmPublicKeyPath;
+        $this->defaultBank      = $defaultBank;
 
         $this->bankList = include('Config/BkmBankList.php');
     }
@@ -107,7 +112,7 @@ class BkmExpress
         $incomingResult = new IncomingResult($data);
         $verified       = $incomingResult->verify($this->bkmPublicKeyPath);
 
-        if (Calculate::timeDiff($incomingResult->getTs()) > 30) {
+        if (Calculate::timeDiff($incomingResult->getTimestamp()) > 30) {
             return Result::build('REQUEST_NOT_SYNCHRONIZED');
         }
 
@@ -137,13 +142,23 @@ class BkmExpress
 
     public function getPosResponse($bankId, $data)
     {
-        $bank  = $this->getBank($bankId);
-        $class = __NAMESPACE__ .'\PosResponse\Response' . $bank['system'];
+        $bank   = $this->getBank($bankId);
+        $system = (!empty($bank['system']) ? $bank['system'] : $this->defaultBank);
+        $class  = __NAMESPACE__ .'\PosResponse\Response' . $system;
 
         if (! class_exists($class)) {
             throw new ClassNotFoundException("{$class} not found!");
         }
 
         return new $class($data);
+    }
+
+    public function setDefaultBank($bank)
+    {
+        if (! in_array($bank, $this->bankSystemList)) {
+            throw new \Exception("not acceptable");
+        }
+
+        $this->defaultBank = $bank;
     }
 }

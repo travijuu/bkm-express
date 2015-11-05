@@ -81,7 +81,7 @@ class IncomingResult
     /**
      * @return string
      */
-    public function getT()
+    public function getToken()
     {
         return $this->t;
     }
@@ -91,7 +91,7 @@ class IncomingResult
      *
      * @return $this;
      */
-    public function setT($t)
+    public function setToken($t)
     {
         $this->t = $t;
 
@@ -141,7 +141,7 @@ class IncomingResult
     /**
      * @return string
      */
-    public function getTs()
+    public function getTimestamp()
     {
         return $this->ts;
     }
@@ -151,7 +151,7 @@ class IncomingResult
      *
      * @return $this;
      */
-    public function setTs($ts)
+    public function setTimestamp($ts)
     {
         $this->ts = $ts;
 
@@ -161,7 +161,7 @@ class IncomingResult
     /**
      * @return string
      */
-    public function getS()
+    public function getSignature()
     {
         return $this->s;
     }
@@ -171,7 +171,7 @@ class IncomingResult
      *
      * @return $this;
      */
-    public function setS($s)
+    public function setSignature($s)
     {
         $this->s = $s;
 
@@ -278,7 +278,10 @@ class IncomingResult
         return $this;
     }
 
-    public function success()
+    /**
+     * @return boolean;
+     */
+    public function isSuccess()
     {
         return is_null($this->r);
     }
