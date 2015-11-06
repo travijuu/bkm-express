@@ -6,16 +6,32 @@ use Travijuu\BkmExpress\Utility\Certificate;
 class RedirectRequest
 {
 
-	public $t;
+    /**
+     * @var string
+     */
+    public $t;
 
-	public $s;
+    /**
+     * @var string
+     */
+    public $s;
 
-	public $ts;
+    /**
+     * @var string
+     */
+    public $ts;
 
-	public $url;
+    /**
+     * @var string
+     */
+    public $url;
 
 
-	public function __construct(InitializePaymentResponse $response, $privateKeyPath)
+    /**
+     * @param InitializePaymentResponse $response
+     * @param $privateKeyPath
+     */
+    public function __construct(InitializePaymentResponse $response, $privateKeyPath)
 	{
 		$this->t      = $response->getWSResponse()->getToken();
 		$this->url    = $response->getWSResponse()->getUrl();
@@ -23,7 +39,10 @@ class RedirectRequest
 		$this->createSignature($privateKeyPath);
 	}
 
-	public function createSignature($privateKeyPath)
+    /**
+     * @param $privateKeyPath
+     */
+    public function createSignature($privateKeyPath)
 	{
 		$this->ts = date("Ymd-H:i:s");
 		$data     = $this->t . $this->ts;
@@ -39,7 +58,7 @@ class RedirectRequest
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSignature()
     {
@@ -47,7 +66,7 @@ class RedirectRequest
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTimestamp()
     {

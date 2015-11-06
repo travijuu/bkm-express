@@ -5,108 +5,134 @@ class InitializePaymentWSRequest
 {
 
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $mId;
+	private $mId;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $sUrl;
+	private $sUrl;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $cUrl;
+	private $cUrl;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $sAmount;
+	private $sAmount;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $cAmount;
+	private $cAmount;
 	/**
-	 * @access public
 	 * @var Bank
 	 */
-	public $instOpts = [];
+	private $instOpts = [];
 	/**
-	 * @access public
 	 * @var bank[]
 	 */
-	public $bank;
+	private $bank;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $ts;
+	private $ts;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $s;
+	private $s;
 
-	public function setMerchantId($mId)
+    /**
+     * @param $mId
+     * @return $this
+     */
+    public function setMerchantId($mId)
 	{
 		$this->mId = $mId;
 
         return $this;
 	}
 
-	public function setSuccessUrl($url)
+    /**
+     * @param $url
+     * @return $this
+     */
+    public function setSuccessUrl($url)
 	{
 		$this->sUrl = $url;
 
         return $this;
 	}
 
-	public function setCancelUrl($url)
+    /**
+     * @param $url
+     * @return $this
+     */
+    public function setCancelUrl($url)
 	{
 		$this->cUrl = $url;
 
         return $this;
 	}
 
-	public function setSaleAmount($amount)
+    /**
+     * @param $amount
+     * @return $this
+     */
+    public function setSaleAmount($amount)
 	{
 		$this->sAmount = number_format($amount, 2, ",", "");
 
         return $this;
 	}
 
-	public function setCargoAmount($amount)
+    /**
+     * @param $amount
+     * @return $this
+     */
+    public function setCargoAmount($amount)
 	{
 		$this->cAmount = number_format($amount, 2, ",", "");
 
         return $this;
 	}
 
-	public function setBanks($banks)
+    /**
+     * @param $banks
+     * @return $this
+     */
+    public function setBanks($banks)
 	{
 		$this->instOpts = $banks;
 
         return $this;
 	}
 
-	public function setTimestamp($timestamp)
+    /**
+     * @param $timestamp
+     * @return $this
+     */
+    public function setTimestamp($timestamp)
 	{
 		$this->ts = $timestamp;
 
         return $this;
 	}
 
-	public function setSignature($signature)
+    /**
+     * @param $signature
+     * @return $this
+     */
+    public function setSignature($signature)
 	{
 		$this->s = $signature;
 
         return $this;
 	}
 
-	public function getDataToBeHashed()
+    /**
+     * @return string
+     */
+    public function getDataToBeHashed()
 	{
 		$data = $this->mId . $this->sUrl . $this->cUrl . $this->sAmount . $this->cAmount;
 

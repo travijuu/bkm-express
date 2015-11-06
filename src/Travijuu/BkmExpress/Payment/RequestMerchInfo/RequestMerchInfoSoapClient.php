@@ -10,8 +10,7 @@ class RequestMerchInfoSoapClient extends SoapClient
     public $requestMerchInfo;
 
     /**
-     * Default class map for wsdl=>php
-     * @access private
+     * Default class map for wsdl -> php
      * @var array
      */
     private static $classmap = array(
@@ -28,39 +27,15 @@ class RequestMerchInfoSoapClient extends SoapClient
      * @param string $wsdl WSDL location for this service
      * @param array $options Options for the SoapClient
      */
-    public function __construct($wsdl, $options = []) {
-
+    public function __construct($wsdl, $options = [])
+    {
         foreach(self::$classmap as $wsdlClassName => $phpClassName) {
-
             if(!isset($options['classmap'][$wsdlClassName])) {
-
                 $options['classmap'][$wsdlClassName] = $phpClassName;
             }
         }
 
         parent::__construct($wsdl, $options);
-    }
-
-    /**
-     * Checks if an argument list matches against a valid argument type list
-     * @param array $arguments The argument list to check
-     * @param array $validParameters A list of valid argument types
-     * @return boolean true if arguments match against validParameters
-     * @throws Exception invalid function signature message
-     */
-    public function _checkArguments($arguments, $validParameters) {
-        $variables = "";
-        foreach ($arguments as $arg) {
-            $type = gettype($arg);
-            if ($type == "object") {
-                $type = get_class($arg);
-            }
-            $variables .= "(".$type.")";
-        }
-        if (!in_array($variables, $validParameters)) {
-            throw new Exception("Invalid parameter types: ".str_replace(")(", ", ", $variables));
-        }
-        return true;
     }
 
     public function setParams(RequestMerchInfo $requestMerchInfo)
@@ -70,18 +45,11 @@ class RequestMerchInfoSoapClient extends SoapClient
 
     /**
      * Service Call: requestMerchInfo
-     * Parameter options:
-     * (requestMerchInfo) parameters
-     * @param mixed,... See function description for parameter options
+     * @param mixed,...
      * @return RequestMerchInfoResponse
-     * @throws Exception invalid function signature message
      */
-    public function requestMerchInfo($mixed = null) {
-        $validParameters = array(
-            "(requestMerchInfo)",
-        );
-        $args = [$this->requestMerchInfo];
-        //$this->_checkArguments($args, $validParameters);
-        return $this->__soapCall("requestMerchInfo", $args);
+    public function requestMerchInfo($mixed = null)
+    {
+        return $this->__soapCall("requestMerchInfo", [$this->requestMerchInfo]);
     }
 }

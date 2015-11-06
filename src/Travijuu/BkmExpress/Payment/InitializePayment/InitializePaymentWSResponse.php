@@ -6,47 +6,58 @@ use Travijuu\BkmExpress\Payment\AbstractWSResponse;
 class InitializePaymentWSResponse extends AbstractWSResponse
 {
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $t;
+	private $t;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $url;
+	private $url;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $ts;
+	private $ts;
 	/**
-	 * @access public
 	 * @var string
 	 */
-	public $s;
+	private $s;
 
-	public function getToken()
+    /**
+     * @return string
+     */
+    public function getToken()
 	{
 		return $this->t;
 	}
 
-	public function getUrl()
+    /**
+     * @return string
+     */
+    public function getUrl()
 	{
 		return $this->url;
 	}
 
-	public function getTimestamp()
+    /**
+     * @return string
+     */
+    public function getTimestamp()
 	{
 		return $this->ts;
 	}
 
-	public function getSignature()
+    /**
+     * @return string
+     */
+    public function getSignature()
 	{
 		return $this->s;
 	}
 
-	public function getMessage()
+    /**
+     * @return string
+     */
+    public function getMessage()
 	{
 		return $this->result->getMessage();
 	}

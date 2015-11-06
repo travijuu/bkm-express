@@ -7,80 +7,65 @@ class RequestMerchInfoWSResponse extends AbstractWSResponse
 {
 
     /**
-     * @access public
      * @var string
      */
-    public $t;
+    private $t;
     /**
-     * @access public
      * @var string
      */
-    public $posUrl;
+    private $posUrl;
     /**
-     * @access public
      * @var string
      */
-    public $posUid;
+    private $posUid;
     /**
-     * @access public
      * @var string
      */
-    public $posPwd;
+    private $posPwd;
     /**
-     * @access public
      * @var boolean
      */
-    public $s3Dauth;
+    private $s3Dauth;
     /**
-     * @access public
      * @var string
      */
-    public $mpiUrl;
+    private $mpiUrl;
     /**
-     * @access public
      * @var string
      */
-    public $mpiUid;
+    private $mpiUid;
     /**
-     * @access public
      * @var string
      */
-    public $mpiPwd;
+    private $mpiPwd;
     /**
-     * @access public
      * @var string
      */
-    public $md;
+    private $md;
     /**
-     * @access public
      * @var string
      */
-    public $xid;
+    private $xid;
     /**
-     * @access public
      * @var boolean
      */
-    public $s3DFDec;
+    private $s3DFDec;
     /**
-     * @access public
      * @var string
      */
-    public $cIp;
+    private $cIp;
     /**
-     * @access public
      * @var string
      */
-    public $extra;
+    private $extra;
     /**
-     * @access public
      * @var string
      */
-    public $ts;
+    private $ts;
     /**
-     * @access public
      * @var string
      */
-    public $s;
+    private $s;
 
     /**
      * @return string

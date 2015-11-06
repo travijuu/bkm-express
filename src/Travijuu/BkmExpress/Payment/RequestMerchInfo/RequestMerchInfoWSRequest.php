@@ -6,40 +6,33 @@ class RequestMerchInfoWSRequest
 {
 
     /**
-     * @access public
      * @var string
      */
-    public $t;
+    private $t;
     /**
-     * @access public
      * @var string
      */
-    public $bid;
+    private $bid;
     /**
-     * @access public
      * @var string
      */
-    public $bName;
+    private $bName;
     /**
-     * @access public
      * @var string
      */
-    public $cBin;
+    private $cBin;
     /**
-     * @access public
      * @var integer
      */
-    public $nofInst;
+    private $nofInst;
     /**
-     * @access public
      * @var string
      */
-    public $ts;
+    private $ts;
     /**
-     * @access public
      * @var string
      */
-    public $s;
+    private $s;
 
     /**
      * @return string

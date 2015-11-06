@@ -14,6 +14,9 @@ class RequestMerchInfo
         $this->requestMerchInfoWSRequest = new RequestMerchInfoWSRequest();
     }
 
+    /**
+     * @return RequestMerchInfoWSRequest
+     */
     public function getWSRequest()
     {
         return $this->requestMerchInfoWSRequest;

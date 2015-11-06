@@ -123,7 +123,7 @@ class IncomingResult
      */
     public function getPosRef()
     {
-        return $this->success() ? htmlspecialchars_decode($this->posRef) : $this->posRef;
+        return $this->isSuccess() ? htmlspecialchars_decode($this->posRef) : $this->posRef;
     }
 
     /**

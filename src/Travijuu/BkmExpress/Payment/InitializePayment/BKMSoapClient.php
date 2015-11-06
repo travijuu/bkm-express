@@ -19,12 +19,10 @@ class BKMSoapClient extends SoapClient
 		'result'                      => 'Travijuu\BkmExpress\Common\Result',
 	);
 
-	public function __construct($wsdl, $options = []) {
-
+	public function __construct($wsdl, $options = [])
+    {
         foreach(self::$classmap as $wsdlClassName => $phpClassName) {
-
 		    if(! isset($options['classmap'][$wsdlClassName])) {
-
 		        $options['classmap'][$wsdlClassName] = $phpClassName;
 		    }
 		}

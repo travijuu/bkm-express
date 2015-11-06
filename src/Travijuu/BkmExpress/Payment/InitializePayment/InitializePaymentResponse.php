@@ -11,21 +11,34 @@ class InitializePaymentResponse
      */
     public $initializePaymentWSResponse;
 
-	public function success()
+    /**
+     * @return bool
+     */
+    public function success()
 	{
 		return $this->initializePaymentWSResponse->getResult()->getCode() == 0;
 	}
 
-	public function getMessage()
+    /**
+     * @return string
+     */
+    public function getMessage()
 	{
 		return $this->initializePaymentWSResponse->getResult()->getMessage();
 	}
 
-	public function getWSResponse()
+    /**
+     * @return InitializePaymentWSResponse
+     */
+    public function getWSResponse()
 	{
 		return $this->initializePaymentWSResponse;
 	}
 
+    /**
+     * @param $bkmPublicKeyPath
+     * @return boolean
+     */
     public function verify($bkmPublicKeyPath)
     {
         $dataToBeVerified = $this->initializePaymentWSResponse->getToken() .

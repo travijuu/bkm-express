@@ -9,11 +9,18 @@ abstract class AbstractWSResponse
      */
     public $result;
 
+
+    /**
+     * @return \Travijuu\BkmExpress\Common\Result
+     */
     public function getResult()
     {
         return $this->result;
     }
 
+    /**
+     * @param $result
+     */
     public function setResult($result)
     {
         $this->result = $result;

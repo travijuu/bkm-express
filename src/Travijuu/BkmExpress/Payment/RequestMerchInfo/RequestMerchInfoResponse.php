@@ -7,7 +7,6 @@ class RequestMerchInfoResponse
 {
 
     /**
-     * @access public
      * @var RequestMerchInfoWSResponse
      */
     public $requestMerchInfoWSResponse;
@@ -25,6 +24,9 @@ class RequestMerchInfoResponse
         return $this->requestMerchInfoWSResponse;
     }
 
+    /**
+     * @param VirtualPos $virtualPos
+     */
     public function setVirtualPos(VirtualPos $virtualPos)
     {
         $this->requestMerchInfoWSResponse->setPosUrl($virtualPos->getPosUrl());
