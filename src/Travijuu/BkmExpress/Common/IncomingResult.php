@@ -286,6 +286,11 @@ class IncomingResult
         return is_null($this->r);
     }
 
+
+    /**
+     * @param $bkmPublicKeyPath
+     * @return boolean
+     */
     public function verify($bkmPublicKeyPath)
     {
         $dataToBeVerified = $this->t . $this->posRef . $this->xid . $this->md . $this->ts;

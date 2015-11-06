@@ -2,13 +2,21 @@
 namespace Travijuu\BkmExpress\Payment\InitializePayment;
 
 use SoapClient;
+use Travijuu\BkmExpress\Exception\UnexpectedInstance;
 
-class BKMSoapClient extends SoapClient
+class InitializePaymentSoapClient extends SoapClient
 {
 
-	public $initializePayment;
+    /**
+     * @var InitializePayment
+     */
+    public $initializePayment;
 
-	private static $classmap = array(
+    /**
+     * class mapping array for wsdl
+     * @var array
+     */
+	private static $classmap = [
 		'initializePayment'           => 'Travijuu\BkmExpress\Payment\InitializePayment\InitializePayment',
 		'initializePaymentWSRequest'  => 'Travijuu\BkmExpress\Payment\InitializePayment\InitializePaymentWSRequest',
 		'bank'                        => 'Travijuu\BkmExpress\Common\Bank',
@@ -17,8 +25,13 @@ class BKMSoapClient extends SoapClient
 		'initializePaymentResponse'   => 'Travijuu\BkmExpress\Payment\InitializePayment\InitializePaymentResponse',
 		'initializePaymentWSResponse' => 'Travijuu\BkmExpress\Payment\InitializePayment\InitializePaymentWSResponse',
 		'result'                      => 'Travijuu\BkmExpress\Common\Result',
-	);
+	];
 
+    /**
+     * default construct for mapping given classes with the wsdl
+     * @param string $wsdl WSDL location for this service
+     * @param array $options Options for the SoapClient
+     */
 	public function __construct($wsdl, $options = [])
     {
         foreach(self::$classmap as $wsdlClassName => $phpClassName) {
@@ -30,9 +43,17 @@ class BKMSoapClient extends SoapClient
 		parent::__construct($wsdl, $options);
 	}
 
-	public function setParams($initializePayment)
+    /**
+     * @param $initializePayment
+     * @throws UnexpectedInstance
+     */
+    public function setParams($initializePayment)
 	{
-		$this->initializePayment = $initializePayment;
+        if (! $initializePayment instanceof InitializePayment) {
+            throw new UnexpectedInstance("Should be instance of InitializePayment");
+        }
+
+        $this->initializePayment = $initializePayment;
 	}
 
     /**

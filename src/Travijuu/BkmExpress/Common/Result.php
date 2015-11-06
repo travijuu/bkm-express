@@ -5,17 +5,14 @@ class Result
 {
 	
 	/**
-	 * @access private
 	 * @var integer
 	 */
 	private $resultCode;
 	/**
-	 * @access private
 	 * @var string
 	 */
 	private $resultMsg;
 	/**
-	 * @access private
 	 * @var string
 	 */
 	private $resultDet;
@@ -27,7 +24,10 @@ class Result
         $this->resultDet  = $resultDet;
     }
 
-	public function getCode()
+    /**
+     * @return int
+     */
+    public function getCode()
 	{
 		return $this->resultCode;
 	}
@@ -44,7 +44,10 @@ class Result
         return $this;
     }
 
-	public function getMessage()
+    /**
+     * @return string
+     */
+    public function getMessage()
 	{
 		return $this->resultMsg;
 	}
@@ -61,7 +64,10 @@ class Result
         return $this;
     }
 
-	public function getDetail()
+    /**
+     * @return string
+     */
+    public function getDetail()
 	{
 		return $this->resultDet;
 	}
@@ -78,6 +84,10 @@ class Result
         return $this;
     }
 
+    /**
+     * @param $key
+     * @return Result
+     */
     public static function build($key)
     {
         $responseCode = MerchantWSResponseCode::$$key;

@@ -146,7 +146,9 @@ class InitializePaymentWSRequest
 
 				foreach ($bin->getInstallments() as $installment) {
 					
-					$data .= $installment->getInstallment() . $installment->getInstallmentAmount() . $installment->getCargoAmount() . $installment->getTotalAmount() . $installment->getPayCargoAtFirstInstallment() . $installment->getDescription();
+					$data .= $installment->getInstallment() . $installment->getInstallmentAmount() .
+                             $installment->getCargoAmount() . $installment->getTotalAmount() .
+                             $installment->getPayCargoAtFirstInstallment() . $installment->getDescription();
 				}
 			}
 		}

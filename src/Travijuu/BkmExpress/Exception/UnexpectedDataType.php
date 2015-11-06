@@ -1,6 +1,7 @@
 <?php
 namespace Travijuu\BkmExpress\Exception;
 
-class UnexpectedDataType extends \Exception{
+class UnexpectedDataType extends \Exception
+{
 
 }

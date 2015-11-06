@@ -10,20 +10,20 @@ class RequestMerchInfoSoapClient extends SoapClient
     public $requestMerchInfo;
 
     /**
-     * Default class map for wsdl -> php
+     * class mapping array for wsdl
      * @var array
      */
-    private static $classmap = array(
+    private static $classmap = [
         'requestMerchInfo'            => 'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfo',
         'requestMerchInfoWSRequest'   => 'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfoWSRequest',
         'requestMerchInfoResponse'    => 'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfoResponse',
         'requestMerchInfoWSResponse'  => 'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfoWSResponse',
         'requestMerchInfoServiceImpl' => 'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfoServer',
         'result'                      => 'Travijuu\BkmExpress\Common\Result',
-    );
+    ];
 
     /**
-     * Constructor using wsdl location and options array
+     * default construct for mapping given classes with the wsdl
      * @param string $wsdl WSDL location for this service
      * @param array $options Options for the SoapClient
      */

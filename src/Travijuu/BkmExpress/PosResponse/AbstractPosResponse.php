@@ -188,5 +188,4 @@ abstract class AbstractPosResponse
         return $this;
     }
 
-    public abstract function build();
 }

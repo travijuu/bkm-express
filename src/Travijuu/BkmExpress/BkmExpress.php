@@ -2,10 +2,10 @@
 namespace Travijuu\BkmExpress;
 
 use Travijuu\BkmExpress\Common\IncomingResult;
-use Travijuu\BkmExpress\Common\Result;
+use Travijuu\BkmExpress\Common\VirtualPos;
 use Travijuu\BkmExpress\Exception\UnexpectedDataType;
 use Travijuu\BkmExpress\Exception\VerificationException;
-use Travijuu\BkmExpress\Payment\InitializePayment\BKMSoapClient;
+use Travijuu\BkmExpress\Payment\InitializePayment\InitializePaymentSoapClient;
 use Travijuu\BkmExpress\Payment\InitializePayment\InitializePayment;
 use Travijuu\BkmExpress\Payment\InitializePayment\InitializePaymentWSRequest;
 use Travijuu\BkmExpress\Payment\InitializePayment\RedirectRequest;
@@ -18,24 +18,74 @@ use Closure;
 
 class BkmExpress
 {
+
+    /**
+     * Merchant ID given by BKM Express
+     *
+     * @var string
+     */
     public $mid;
 
+    /**
+     * BKM Express will redirect you to this url if the transaction is accomplished
+     *
+     * @var string
+     */
     public $successUrl;
 
+    /**
+     * BKM Express will redirect you to this url if the transaction is failed
+     *
+     * @var
+     */
     public $cancelUrl;
 
+    /**
+     * Full path of your private key
+     *
+     * @string
+     */
     public $privateKeyPath;
 
+    /**
+     * Full Path of your public key
+     *
+     * @var string
+     */
     public $publicKeyPath;
 
+    /**
+     * Full path of BKM Express public key
+     *
+     * @var string
+     */
     public $bkmPublicKeyPath;
 
+    /**
+     * This helps to identify which bank infrastructure is used in this transaction by default
+     *
+     * @var string
+     */
     public $defaultBank;
 
+    /**
+     * These are the supported banks of BKM Express
+     *
+     * @var array|mixed
+     */
     public $bankList = [];
 
+    /**
+     * Should be filled with API credentials of banks you owned
+     *
+     * @var array
+     */
     public $virtualPosList = [];
 
+    /**
+     * These are the supported POS systems
+     * @var array
+     */
     public $bankSystemList = ['Posnet', 'NestPay', 'Gvp'];
 
 
@@ -54,7 +104,7 @@ class BkmExpress
 
     public function initPayment($wsdl, $sAmount, $cAmount, $banks)
     {
-        $bkmClient          = new BKMSoapClient($wsdl, ['trace' => 1]);
+        $bkmClient          = new InitializePaymentSoapClient($wsdl, ['trace' => 1]);
         $initPayment        = new InitializePayment();
         $initPaymentRequest = new InitializePaymentWSRequest();
 
@@ -95,11 +145,11 @@ class BkmExpress
 
     public function requestMerchInfo($wsdl, $virtualPosList, Closure $saveTokenCallback = null)
     {
-        $this->virtualPosList = $virtualPosList;
+        $this->setVirtualPosList($virtualPosList);
 
         $server = new SoapServer($wsdl, ['classmap' => RequestMerchInfoServer::$classmap]);
         $server->setClass(
-            'Travijuu\BkmExpress\Payment\RequestMerchInfo\RequestMerchInfoServer',
+            __NAMESPACE__ . '\Payment\RequestMerchInfo\RequestMerchInfoServer',
             $this->publicKeyPath,
             $this->privateKeyPath,
             $virtualPosList,
@@ -144,7 +194,7 @@ class BkmExpress
     public function getPosResponse($bankId, $data)
     {
         $bank   = $this->getBank($bankId);
-        $system = (!empty($bank['system']) ? $bank['system'] : $this->defaultBank);
+        $system = (! empty($bank['system']) ? $bank['system'] : $this->defaultBank);
         $class  = __NAMESPACE__ .'\PosResponse\Response' . $system;
 
         if (! class_exists($class)) {
@@ -161,5 +211,27 @@ class BkmExpress
         }
 
         $this->defaultBank = $bank;
+    }
+
+    private function setVirtualPosList($virtualPosList)
+    {
+        if (! is_array($virtualPosList)) {
+            throw new UnexpectedDataType("VirtualPosList should be an array");
+        }
+
+        $this->virtualPosList = [];
+
+        foreach ($virtualPosList as $virtualPos) {
+            $this->addVirtualPos($virtualPos);
+        }
+    }
+
+    private function addVirtualPos($virtualPos)
+    {
+        if (! $virtualPos instanceof VirtualPos) {
+            throw new UnexpectedInstance("Should be instance of VirtualPos");
+        }
+
+        array_push($this->virtualPosList, $virtualPos);
     }
 }

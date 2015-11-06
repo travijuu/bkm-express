@@ -8,93 +8,117 @@ class Bank
 {
 	
 	/**
-	 * @access private
 	 * @var string
 	 */
 	private $id;
 	/**
-	 * @access private
 	 * @var string
 	 */
 	private $name;
 	/**
-	 * @access private
 	 * @var string
 	 */
 	private $expBank;
 	/**
-	 * @access private
-	 * @var Bin
+	 * @var array|Bin
 	 */
 	private $bins = [];
-	/**
-	 * @access private
-	 * @var bin[]
-	 */
-	private $bin;
 
+
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
-	public function setId($id)
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setId($id)
 	{
 		$this->id = $id;
 
         return $this;
 	}
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
-	public function setName($name)
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function setName($name)
 	{
 		$this->name = $name;
 
         return $this;
 	}
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->expBank;
     }
 
-	public function setDescription($description)
+    /**
+     * @param $description
+     * @return $this
+     */
+    public function setDescription($description)
 	{
 		$this->expBank = $description;
 
         return $this;
 	}
 
+    /**
+     * @return array|Bin
+     */
     public function getBins()
     {
         return $this->bins;
     }
 
-	public function setBins($bins) 
+    /**
+     * @param $bins
+     * @return $this
+     * @throws UnexpectedDataType
+     * @throws UnexpectedInstance
+     */
+    public function setBins($bins)
 	{
 		if (! is_array($bins)) {
-			
-			throw new UnexpectedDataType("Bins should be array");
+			throw new UnexpectedDataType("Bins should be an array");
 		}
 
 		$this->bins = [];
 
 		foreach ($bins as $bin) {
-			
 			$this->addBin($bin);
 		}
 
         return $this;
 	}
 
-	public function addBin($bin)
+    /**
+     * @param $bin
+     * @return $this
+     * @throws UnexpectedInstance
+     */
+    public function addBin($bin)
 	{
 		if (! $bin instanceof Bin) {
-			
 			throw new UnexpectedInstance("Should be instance of Bin");
 		}
 

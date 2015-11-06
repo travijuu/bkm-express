@@ -6,51 +6,74 @@ use Travijuu\BkmExpress\Exception\UnexpectedInstance;
 
 class Bin
 {
-	
-	private $value;
 
-	private $insts = [];
+    /**
+     * @var string
+     */
+    private $value;
 
-	private $inst;
+    /**
+     * @var array|Installment
+     */
+    private $insts = [];
 
+
+    /**
+     * @return string
+     */
     public function getValue()
     {
         return $this->value;
     }
 
-	public function setValue($value)
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setValue($value)
 	{
 		$this->value = $value;
 
         return $this;
 	}
 
+    /**
+     * @return array|Installment
+     */
     public function getInstallments()
     {
         return $this->insts;
     }
 
-	public function setInstallments($installments)
+    /**
+     * @param $installments
+     * @return $this
+     * @throws UnexpectedDataType
+     * @throws UnexpectedInstance
+     */
+    public function setInstallments($installments)
 	{
 		if (! is_array($installments)) {
-			
-			throw new UnexpectedDataType("Installments should be array");
+			throw new UnexpectedDataType("Installments should be an array");
 		}
 
 		$this->insts = [];
 
 		foreach ($installments as $installment) {
-			
 			$this->addInstallment($installment);
 		}
 
         return $this;
 	}
 
-	public function addInstallment($installment)
+    /**
+     * @param $installment
+     * @return $this
+     * @throws UnexpectedInstance
+     */
+    public function addInstallment($installment)
 	{
 		if (! $installment instanceof Installment) {
-
 			throw new UnexpectedInstance("Should be instance of Installment");
 		}
 
