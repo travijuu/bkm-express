@@ -31,11 +31,11 @@ class Bin
      * @return $this
      */
     public function setValue($value)
-	{
-		$this->value = $value;
+    {
+        $this->value = $value;
 
         return $this;
-	}
+    }
 
     /**
      * @return array|Installment
@@ -52,19 +52,19 @@ class Bin
      * @throws UnexpectedInstance
      */
     public function setInstallments($installments)
-	{
-		if (! is_array($installments)) {
-			throw new UnexpectedDataType("Installments should be an array");
-		}
+    {
+        if (! is_array($installments)) {
+            throw new UnexpectedDataType("Installments should be an array");
+        }
 
-		$this->insts = [];
+        $this->insts = [];
 
-		foreach ($installments as $installment) {
-			$this->addInstallment($installment);
-		}
+        foreach ($installments as $installment) {
+            $this->addInstallment($installment);
+        }
 
         return $this;
-	}
+    }
 
     /**
      * @param $installment
@@ -72,13 +72,13 @@ class Bin
      * @throws UnexpectedInstance
      */
     public function addInstallment($installment)
-	{
-		if (! $installment instanceof Installment) {
-			throw new UnexpectedInstance("Should be instance of Installment");
-		}
+    {
+        if (! $installment instanceof Installment) {
+            throw new UnexpectedInstance("Should be instance of Installment");
+        }
 
-		array_push($this->insts, $installment);
+        array_push($this->insts, $installment);
 
         return $this;
-	}
+    }
 }

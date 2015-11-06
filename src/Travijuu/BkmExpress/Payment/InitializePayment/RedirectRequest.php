@@ -32,22 +32,22 @@ class RedirectRequest
      * @param $privateKeyPath
      */
     public function __construct(InitializePaymentResponse $response, $privateKeyPath)
-	{
-		$this->t      = $response->getWSResponse()->getToken();
-		$this->url    = $response->getWSResponse()->getUrl();
+    {
+        $this->t      = $response->getWSResponse()->getToken();
+        $this->url    = $response->getWSResponse()->getUrl();
 
-		$this->createSignature($privateKeyPath);
-	}
+        $this->createSignature($privateKeyPath);
+    }
 
     /**
      * @param $privateKeyPath
      */
     public function createSignature($privateKeyPath)
-	{
-		$this->ts = date("Ymd-H:i:s");
-		$data     = $this->t . $this->ts;
+    {
+        $this->ts = date("Ymd-H:i:s");
+        $data     = $this->t . $this->ts;
         $this->s  = base64_encode(Certificate::sign($data, $privateKeyPath));
-	}
+    }
 
     /**
      * @return string

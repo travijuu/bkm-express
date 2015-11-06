@@ -3,19 +3,19 @@ namespace Travijuu\BkmExpress\Common;
 
 class Result
 {
-	
-	/**
-	 * @var integer
-	 */
-	private $resultCode;
-	/**
-	 * @var string
-	 */
-	private $resultMsg;
-	/**
-	 * @var string
-	 */
-	private $resultDet;
+    
+    /**
+     * @var integer
+     */
+    private $resultCode;
+    /**
+     * @var string
+     */
+    private $resultMsg;
+    /**
+     * @var string
+     */
+    private $resultDet;
 
     public function __construct($resultCode, $resultMsg, $resultDet = '')
     {
@@ -28,9 +28,9 @@ class Result
      * @return int
      */
     public function getCode()
-	{
-		return $this->resultCode;
-	}
+    {
+        return $this->resultCode;
+    }
 
     /**
      * @param int $resultCode
@@ -48,9 +48,9 @@ class Result
      * @return string
      */
     public function getMessage()
-	{
-		return $this->resultMsg;
-	}
+    {
+        return $this->resultMsg;
+    }
 
     /**
      * @param string $resultMsg
@@ -68,9 +68,9 @@ class Result
      * @return string
      */
     public function getDetail()
-	{
-		return $this->resultDet;
-	}
+    {
+        return $this->resultDet;
+    }
 
     /**
      * @param string $resultDet

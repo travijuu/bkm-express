@@ -27,9 +27,9 @@ class InitializePayment
      * @return $this
      */
     public function setRequest(InitializePaymentWSRequest $initializePaymentWSRequest)
-	{
-		$this->initializePaymentWSRequest = $initializePaymentWSRequest;
+    {
+        $this->initializePaymentWSRequest = $initializePaymentWSRequest;
 
         return $this;
-	}
+    }
 }

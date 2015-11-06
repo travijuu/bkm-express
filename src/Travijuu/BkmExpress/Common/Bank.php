@@ -6,23 +6,23 @@ use Travijuu\BkmExpress\Exception\UnexpectedInstance;
 
 class Bank
 {
-	
-	/**
-	 * @var string
-	 */
-	private $id;
-	/**
-	 * @var string
-	 */
-	private $name;
-	/**
-	 * @var string
-	 */
-	private $expBank;
-	/**
-	 * @var array|Bin
-	 */
-	private $bins = [];
+    
+    /**
+     * @var string
+     */
+    private $id;
+    /**
+     * @var string
+     */
+    private $name;
+    /**
+     * @var string
+     */
+    private $expBank;
+    /**
+     * @var array|Bin
+     */
+    private $bins = [];
 
 
     /**
@@ -38,11 +38,11 @@ class Bank
      * @return $this
      */
     public function setId($id)
-	{
-		$this->id = $id;
+    {
+        $this->id = $id;
 
         return $this;
-	}
+    }
 
     /**
      * @return string
@@ -57,11 +57,11 @@ class Bank
      * @return $this
      */
     public function setName($name)
-	{
-		$this->name = $name;
+    {
+        $this->name = $name;
 
         return $this;
-	}
+    }
 
     /**
      * @return string
@@ -76,11 +76,11 @@ class Bank
      * @return $this
      */
     public function setDescription($description)
-	{
-		$this->expBank = $description;
+    {
+        $this->expBank = $description;
 
         return $this;
-	}
+    }
 
     /**
      * @return array|Bin
@@ -97,19 +97,19 @@ class Bank
      * @throws UnexpectedInstance
      */
     public function setBins($bins)
-	{
-		if (! is_array($bins)) {
-			throw new UnexpectedDataType("Bins should be an array");
-		}
+    {
+        if (! is_array($bins)) {
+            throw new UnexpectedDataType("Bins should be an array");
+        }
 
-		$this->bins = [];
+        $this->bins = [];
 
-		foreach ($bins as $bin) {
-			$this->addBin($bin);
-		}
+        foreach ($bins as $bin) {
+            $this->addBin($bin);
+        }
 
         return $this;
-	}
+    }
 
     /**
      * @param $bin
@@ -117,14 +117,14 @@ class Bank
      * @throws UnexpectedInstance
      */
     public function addBin($bin)
-	{
-		if (! $bin instanceof Bin) {
-			throw new UnexpectedInstance("Should be instance of Bin");
-		}
+    {
+        if (! $bin instanceof Bin) {
+            throw new UnexpectedInstance("Should be instance of Bin");
+        }
 
-		array_push($this->bins, $bin);
+        array_push($this->bins, $bin);
 
         return $this;
-	}
+    }
 }
 

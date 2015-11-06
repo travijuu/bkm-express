@@ -15,25 +15,25 @@ class InitializePaymentResponse
      * @return bool
      */
     public function success()
-	{
-		return $this->initializePaymentWSResponse->getResult()->getCode() == 0;
-	}
+    {
+        return $this->initializePaymentWSResponse->getResult()->getCode() == 0;
+    }
 
     /**
      * @return string
      */
     public function getMessage()
-	{
-		return $this->initializePaymentWSResponse->getResult()->getMessage();
-	}
+    {
+        return $this->initializePaymentWSResponse->getResult()->getMessage();
+    }
 
     /**
      * @return InitializePaymentWSResponse
      */
     public function getWSResponse()
-	{
-		return $this->initializePaymentWSResponse;
-	}
+    {
+        return $this->initializePaymentWSResponse;
+    }
 
     /**
      * @param $bkmPublicKeyPath
