@@ -104,7 +104,7 @@ class BkmExpress
 
     public function initPayment($wsdl, $sAmount, $cAmount, $banks)
     {
-        $bkmClient          = new InitializePaymentSoapClient($wsdl, ['trace' => 1]);
+        $bkmClient          = new InitializePaymentSoapClient($wsdl, ['trace' => 1, 'cache_wsdl' => WSDL_CACHE_NONE]);
         $initPayment        = new InitializePayment();
         $initPaymentRequest = new InitializePaymentWSRequest();
 
