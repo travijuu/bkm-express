@@ -15,7 +15,7 @@ Firstly, add this line into your `composer.json`
 ```json
 {
     "require": {
-        "travijuu/bkm-express": "1.0.1"
+        "travijuu/bkm-express": "1.0.3"
     }
 }
 ```
